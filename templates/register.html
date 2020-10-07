@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <script>
+        $(document).ready(function(){
+            $("#check").submit(function(event){
+                event.preventDefault();
+                $.get("/check", {username: $("#username").val()}, function(data){
+                    if (data == "false")
+                    {
+                        alert("Username taken");
+                        return false;
+                    }
+                    else
+                    {
+                        event.submit();
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <form action="/register" method="post" id="check">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" id="username" name="username" placeholder="username"  type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="password" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="confirmation" placeholder="confirm password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+{% endblock %}

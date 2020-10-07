@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <table class = "table">
+        <thead>
+            <tr>
+                <th scope="col">Stocks</th>
+                <th scope="col">No. of shares</th>
+                <th scope="col">Current Price</th>
+                <th scope="col">Total Value</th>
+                <th scope="col">Cash Balance</th>
+                <th scope="col">Grand Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for field in fields %}
+            <tr>
+                <td>{{ field[0] }}</td>
+                <td>{{ field[1] }}</td>
+                <td>{{ usd(field[2]) }}</td>
+                <td>{{ usd(field[3]) }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ usd(cash) }}</td>
+                <td>{{ usd(total) }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
